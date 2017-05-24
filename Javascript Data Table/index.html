@@ -1,48 +1,67 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title>BrightEdge Web Developer Assignment By Yuxiang Chen</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
-    <link rel="stylesheet" href="/assets/css/style.css">
-  </head>
-  <body class="card">
-      <table class="table table-striped" id="datatable">
-        <thead>
-          <tr>
-            <th onClick="sortData('firstname')">First Name</th>
-            <th onClick="sortData('lastname')">Last Name</th>
-            <th onClick="sortData('phone')">Phone</th>
-            <th onClick="sortData('email')">Email address</th>
-          </tr>
-        </thead>
-        <tbody id="tablebody"></tbody>
-      </table>
-      <nav aria-label="Page navigation example">
-        <ul class="pagination">
-          <li class="page-item">
-            <a class="page-link" href="#" aria-label="Previous">
-              <span aria-hidden="true">&laquo;</span>
-              <span class="sr-only">Previous</span>
-            </a>
-          </li>
-          <li class="page-item"><a class="page-link" href="#">1</a></li>
-          <li class="page-item"><a class="page-link" href="#">2</a></li>
-          <li class="page-item"><a class="page-link" href="#">3</a></li>
-          <li class="page-item">
-            <a class="page-link" href="#" aria-label="Next">
-              <span aria-hidden="true">&raquo;</span>
-              <span class="sr-only">Next</span>
-            </a>
-          </li>
-        </ul>
-      </nav>
 
-    <!-- <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+<head>
+  <meta charset="utf-8">
+  <title>BrightEdge Web Developer Assignment By Yuxiang Chen</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+  <link rel="stylesheet" href="/assets/css/style.css">
+</head>
+
+<body>
+  <div class="input-group search-box">
+    <input type="text" class="form-control" id="searchedWord" placeholder="Search for...">
+    <span class="input-group-btn">
+      <button class="btn btn-secondary" type="button" onClick="search()">Search</button>
+    </span>
+  </div>
+  <div class="card">
+    <table class="table table-striped" id="datatable">
+      <thead class="thead-inverse">
+        <tr>
+          <th onClick="sortData('name')">Name</th>
+          <th onClick="sortData('phone')">Phone</th>
+          <th onClick="sortData('company')">Company</th>
+          <th onClick="sortData('email')">Email address</th>
+        </tr>
+      </thead>
+      <tbody id="tablebody"></tbody>
+    </table>
+    <nav aria-label="Page navigation example">
+      <ul class="pagination">
+        <li class="page-item">
+          <a class="page-link" href="#0" aria-label="Previous">
+            <span aria-hidden="true">&laquo;</span>
+            <span class="sr-only">Previous</span>
+          </a>
+        </li>
+        <li class="page-item"><a class="page-link" href="#1" aria-label="0">1</a></li>
+        <li class="page-item"><a class="page-link" href="#2" aria-label="1">2</a></li>
+        <li class="page-item"><a class="page-link" href="#3" aria-label="2">3</a></li>
+        <li class="page-item"><a class="page-link" href="#1" aria-label="3">4</a></li>
+        <li class="page-item"><a class="page-link" href="#2" aria-label="4">5</a></li>
+        <li class="page-item"><a class="page-link" href="#3" aria-label="5">6</a></li>
+        <li class="page-item"><a class="page-link" href="#1" aria-label="6">7</a></li>
+        <li class="page-item"><a class="page-link" href="#2" aria-label="7">8</a></li>
+        <li class="page-item"><a class="page-link" href="#3" aria-label="8">9</a></li>
+        <li class="page-item"><a class="page-link" href="#3" aria-label="9">10</a></li>
+        <li class="page-item">
+          <a class="page-link" href="#-1" aria-label="Next">
+            <span aria-hidden="true">&raquo;</span>
+            <span class="sr-only">Next</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+
+
+  <!-- <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script> -->
-    <script src="/assets/js/script.js"></script>
-  </body>
+  <script src="/assets/js/script.js"></script>
+</body>
+
 </html>
