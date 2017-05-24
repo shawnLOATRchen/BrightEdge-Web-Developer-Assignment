@@ -44,34 +44,33 @@ function showData(data, page){
   curData = data;
   indexToEdit = 0;
   var tr, th;
+  var itemArray = ['Name', 'Phone', 'Company', 'Email'];
 
   // render column
   var checkColumns = document.getElementsByClassName('checkColumn');
   var theadTr = document.getElementById('theadTr');
   while (theadTr.firstChild) theadTr.removeChild(theadTr.firstChild);
   appendThToTr(theadTr, '#');
-  if (checkColumns[0].checked) appendThToTr(theadTr, 'Name');
-  if (checkColumns[1].checked) appendThToTr(theadTr, 'Phone');
-  if (checkColumns[2].checked) appendThToTr(theadTr, 'Company');
-  if (checkColumns[3].checked) appendThToTr(theadTr, 'Email');
+  for (var i = 0; i < itemArray.length; i++) {
+    if (checkColumns[i].checked) appendThToTr(theadTr, itemArray[i]);
+  }
 
   // render select
   var select = document.getElementById('sort-select');
   while (select.firstChild) select.removeChild(select.firstChild);
   appendOptionToSelect(select, sortby, true);
-  if (checkColumns[0].checked) appendOptionToSelect(select, 'Name');
-  if (checkColumns[1].checked) appendOptionToSelect(select, 'Phone');
-  if (checkColumns[2].checked) appendOptionToSelect(select, 'Company');
-  if (checkColumns[3].checked) appendOptionToSelect(select, 'Email');
+  for (var i = 0; i < itemArray.length; i++) {
+    if (checkColumns[i].checked) appendOptionToSelect(select, itemArray[i]);
+  }
 
   // render table
   for (var i = 10*page; i < Math.min(10*page+10, data.length); i++) {
     user = data[i];
     tr = document.createElement("tr");
+
     // edit button
     th = document.createElement("th");
     var bt = document.createElement("div");
-    // bt.innerHTML = "Edit";
     bt.className = "edit-icon"
     var att = document.createAttribute('index');
     att.value = i;
@@ -79,10 +78,13 @@ function showData(data, page){
     bt.addEventListener("click", function(){editRow(this);});
     th.appendChild(bt);
     tr.appendChild(th);
-    if (checkColumns[0].checked) appendThToTr(tr, user.name);
-    if (checkColumns[1].checked) appendThToTr(tr, user.phone);
-    if (checkColumns[2].checked) appendThToTr(tr, user.company);
-    if (checkColumns[3].checked) appendThToTr(tr, user.email);
+
+    // edit other item
+    var userArray = [user.name, user.phone, user.company, user.email];
+    for (var j = 0; j < userArray.length; j++) {
+      if (checkColumns[j].checked) appendThToTr(tr, userArray[j]);
+    }
+
     tablebody.appendChild(tr);
   }
   // render page-item

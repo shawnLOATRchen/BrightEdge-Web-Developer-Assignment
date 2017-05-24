@@ -12,9 +12,6 @@
   margin: 20px;
 }
 
-thead tr th {
-  cursor: pointer;
-}
 tbody tr th {
   font-weight: 400;
 }
