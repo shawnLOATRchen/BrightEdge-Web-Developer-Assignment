@@ -1,8 +1,7 @@
-// https://api.myjson.com/bins/155o01
-
 var xhr = new XMLHttpRequest();
 var curData, originalData;
 var curPage = 0;
+var sortby = 'N/A';
 xhr.onreadystatechange = function(){
   if (this.readyState == 4 && this.status == 200){
     originalData = JSON.parse(this.responseText);
@@ -26,11 +25,11 @@ for (var i = 0; i < pages.length; i++) {
         showData(curData, Math.max(0, curPage-1));
         break;
       case 'Next':
-        console.log(Math.min(parseInt(curData.length/10-1), curPage+1));
         showData(curData, Math.min(parseInt(curData.length/10-1), curPage+1));
         break;
       default:
         showData(curData, parseInt(attr));
+        break;
     }
   })
 }
@@ -42,32 +41,54 @@ function showData(data, page){
   var tablebody = document.getElementById('tablebody');
   tablebody.innerHTML = "";
   curPage = page;
+  curData = data;
   var tr, th;
 
+  // render column
+  var checkColumns = document.getElementsByClassName('checkColumn');
+  var theadTr = document.getElementById('theadTr');
+  while (theadTr.firstChild) theadTr.removeChild(theadTr.firstChild);
+  appendThToTr(theadTr, '#');
+  if (checkColumns[0].checked) appendThToTr(theadTr, 'Name');
+  if (checkColumns[1].checked) appendThToTr(theadTr, 'Phone');
+  if (checkColumns[2].checked) appendThToTr(theadTr, 'Company');
+  if (checkColumns[3].checked) appendThToTr(theadTr, 'Email');
+
+  // render select
+  var select = document.getElementById('sort-select');
+  while (select.firstChild) select.removeChild(select.firstChild);
+  console.log(sortby);
+  appendOptionToSelect(select, sortby, true);
+  if (checkColumns[0].checked) appendOptionToSelect(select, 'Name');
+  if (checkColumns[1].checked) appendOptionToSelect(select, 'Phone');
+  if (checkColumns[2].checked) appendOptionToSelect(select, 'Company');
+  if (checkColumns[3].checked) appendOptionToSelect(select, 'Email');
+
+  // render table
   for (var i = 10*page; i < Math.min(10*page+10, data.length); i++) {
     user = data[i];
-    // console.log(user.index);
     tr = document.createElement("tr");
-    // first name
+    // edit button
     th = document.createElement("th");
-    th.innerHTML = user.name;
-    tr.appendChild(th);
-    // last name
-    th = document.createElement("th");
-    th.innerHTML = user.phone;
-    tr.appendChild(th);
-    // phone
-    th = document.createElement("th");
-    th.innerHTML = user.company;
-    tr.appendChild(th);
-    // email
-    th = document.createElement("th");
-    th.innerHTML = user.email;
+    bt = document.createElement("button");
+    bt.innerHTML = "edit";
+    bt.addEventListener("click", function(){
+      editRow(i)
+    })
+    th.appendChild(bt);
     tr.appendChild(th);
 
+    if (checkColumns[0].checked) appendThToTr(tr, user.name);
+    if (checkColumns[1].checked) appendThToTr(tr, user.phone);
+    if (checkColumns[2].checked) appendThToTr(tr, user.company);
+    if (checkColumns[3].checked) appendThToTr(tr, user.email);
     tablebody.appendChild(tr);
   }
   // render page-item
+  renderPages();
+}
+
+function renderPages(){
   var pages = document.getElementsByClassName("page-item");
   for (var i = 0; i < pages.length-1; i++) {
     if (i > parseInt(curData.length/10)){
@@ -78,34 +99,45 @@ function showData(data, page){
   }
 }
 
-function sortData(order){
-  var newData = curData.slice();
-  switch (order) {
-    case 'name':
-      newData.sort(function(a, b){
+function appendThToTr(tr, content){
+  var th = document.createElement("th");
+  th.innerHTML = content;
+  tr.appendChild(th);
+}
+function appendOptionToSelect(select, content, display){
+  var option = document.createElement("option");
+  if (!display && content === sortby) option.innerHTML = 'N/A';
+  else option.innerHTML = content;
+  select.appendChild(option);
+}
+
+function sortData(select){
+  sortby = select.value;
+  switch (select.value) {
+    case 'Name':
+      curData.sort(function(a, b){
         return getCompareResult(a.name.toLowerCase(), b.name.toLowerCase());
       })
       break;
-    case 'phone':
-      newData.sort(function(a, b){
+    case 'Phone':
+      curData.sort(function(a, b){
         return getCompareResult(a.phone.toLowerCase(), b.phone.toLowerCase());
       })
       break;
-    case 'company':
-      newData.sort(function(a, b){
+    case 'Company':
+      curData.sort(function(a, b){
         return getCompareResult(a.company.toLowerCase(), b.company.toLowerCase());
       })
       break;
-    case 'email':
-      newData.sort(function(a, b){
+    case 'Email':
+      curData.sort(function(a, b){
         return getCompareResult(a.email.toLowerCase(), b.email.toLowerCase());
       })
       break;
     default:
       break;
   }
-  curData = newData;
-  showData(newData, curPage);
+  showData(curData, curPage);
 }
 
 function getCompareResult(a, b){
@@ -128,7 +160,9 @@ function search(){
       }
     }
   })
-  curData = resultData;
-  curPage = 0;
   showData(resultData, 0);
+}
+
+function switchColumn(){
+  showData(curData, curPage);
 }

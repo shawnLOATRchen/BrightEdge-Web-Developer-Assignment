@@ -1,17 +1,23 @@
 .search-box{
   padding: 20px;
 }
+.choose-column{
+  text-align: center;
+  margin: 0 auto;
+}
+.sort-by{
+  margin: 20px;
+}
 .card{
   margin: 20px;
 }
 
-/*table, {
-  margin-top: 20px;
-}*/
 thead tr th {
   cursor: pointer;
 }
-
+tbody tr th {
+  font-weight: 400;
+}
 nav{
   margin: 0 auto;
 }
