@@ -57,7 +57,7 @@ header img{
 }
 
 #demonbox{
-  background: url(/assets/img/sideImg.png) center center no-repeat;
+  background: url(../img/sideImg.png) center center no-repeat;
   background-size: cover;
   width: 275px;
   padding-bottom: 60%;

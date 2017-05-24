@@ -21,3 +21,34 @@ tbody tr th {
 nav{
   margin: 0 auto;
 }
+
+.edit-icon{
+  width: 24px;
+  height: 24px;
+  background: url(../img/edit-icon.png) center center no-repeat;
+  background-size: cover;
+  cursor: pointer;
+}
+/*pop up form*/
+#pop-up{
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.5);
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 10;
+  display: none;
+}
+
+form{
+  width: 720px;
+  /*height: 85%;*/
+  margin: 5% auto;
+  background-color: white;
+  padding: 20px;
+  /*overflow-y: scroll;*/
+}
+.btn{
+  cursor: pointer;
+}

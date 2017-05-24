@@ -3,11 +3,11 @@
 
 <head>
   <meta charset="utf-8">
-  <title>BrightEdge Web Developer Assignment By Yuxiang Chen</title>
+  <title>BrightEdge Web Developer Assignment By Yuxiang Chen | Javascript Data Table</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
-  <link rel="stylesheet" href="/assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/style.css">
 </head>
 
 <body>
@@ -80,12 +80,37 @@
       </ul>
     </nav>
   </div>
+  <!-- pop up -->
+  <div id="pop-up">
+    <form class="card">
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" class="form-control" id="name">
+      </div>
+      <div class="form-group">
+        <label for="phone">Phone</label>
+        <input type="text" class="form-control" id="phone">
+      </div>
+      <div class="form-group">
+        <label for="company">Company</label>
+        <input type="text" class="form-control" id="company">
+      </div>
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        <input type="email" class="form-control" id="email">
+      </div>
+      <div class="form-group">
+        <div class="btn btn-success" onclick="submitEdit()">Save</div>
+        <div class="btn btn-warning" id="cancel-btn" onclick="cancel()">Cancel</div>
+      </div>
+    </form>
+  </div>
 
 
   <!-- <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script> -->
-  <script src="/assets/js/script.js"></script>
+  <script src="assets/js/script.js"></script>
 </body>
 
 </html>

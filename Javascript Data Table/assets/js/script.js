@@ -42,6 +42,7 @@ function showData(data, page){
   tablebody.innerHTML = "";
   curPage = page;
   curData = data;
+  indexToEdit = 0;
   var tr, th;
 
   // render column
@@ -57,7 +58,6 @@ function showData(data, page){
   // render select
   var select = document.getElementById('sort-select');
   while (select.firstChild) select.removeChild(select.firstChild);
-  console.log(sortby);
   appendOptionToSelect(select, sortby, true);
   if (checkColumns[0].checked) appendOptionToSelect(select, 'Name');
   if (checkColumns[1].checked) appendOptionToSelect(select, 'Phone');
@@ -70,14 +70,15 @@ function showData(data, page){
     tr = document.createElement("tr");
     // edit button
     th = document.createElement("th");
-    bt = document.createElement("button");
-    bt.innerHTML = "edit";
-    bt.addEventListener("click", function(){
-      editRow(i)
-    })
+    var bt = document.createElement("div");
+    // bt.innerHTML = "Edit";
+    bt.className = "edit-icon"
+    var att = document.createAttribute('index');
+    att.value = i;
+    bt.setAttributeNode(att);
+    bt.addEventListener("click", function(){editRow(this);});
     th.appendChild(bt);
     tr.appendChild(th);
-
     if (checkColumns[0].checked) appendThToTr(tr, user.name);
     if (checkColumns[1].checked) appendThToTr(tr, user.phone);
     if (checkColumns[2].checked) appendThToTr(tr, user.company);
@@ -99,7 +100,7 @@ function renderPages(){
   }
 }
 
-function appendThToTr(tr, content){
+function appendThToTr(tr, content, index){
   var th = document.createElement("th");
   th.innerHTML = content;
   tr.appendChild(th);
@@ -165,4 +166,26 @@ function search(){
 
 function switchColumn(){
   showData(curData, curPage);
+}
+function editRow(item){
+  indexToEdit = item.getAttribute('index');
+  document.getElementById('name').value = curData[indexToEdit].name;
+  document.getElementById('phone').value = curData[indexToEdit].phone;
+  document.getElementById('company').value = curData[indexToEdit].company;
+  document.getElementById('email').value = curData[indexToEdit].email;
+  document.getElementById('pop-up').style.display = "block";
+}
+function submitEdit(){
+  curData[indexToEdit] = {
+    name: document.getElementById('name').value,
+    phone: document.getElementById('phone').value,
+    company: document.getElementById('company').value,
+    email: document.getElementById('email').value
+  }
+  originalData = curData;
+  showData(curData,curPage);
+  document.getElementById('pop-up').style.display = "none";
+}
+function cancel(){
+  document.getElementById('pop-up').style.display = "none";
 }
