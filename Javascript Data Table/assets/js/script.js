@@ -5,7 +5,7 @@ var sortby = 'N/A';
 xhr.onreadystatechange = function(){
   if (this.readyState == 4 && this.status == 200){
     originalData = JSON.parse(this.responseText);
-    curData = originalData;
+    curData = originalData.slice();
     showData(curData, 0);
   }
 }
@@ -136,6 +136,7 @@ function sortData(select){
       })
       break;
     default:
+      curData = originalData.slice();
       break;
   }
   showData(curData, curPage);
@@ -182,7 +183,7 @@ function submitEdit(){
     company: document.getElementById('company').value,
     email: document.getElementById('email').value
   }
-  originalData = curData;
+  originalData = curData.slice();
   showData(curData,curPage);
   document.getElementById('pop-up').style.display = "none";
 }
